@@ -1,21 +1,43 @@
+"use client"
 import Image from "next/image";
 import axios from 'axios'
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 
-export default async function Admin() {
+export default function Admin() {
+    const [data, setData] = useState([])
+    const [dataUsuarios, setDataUsuarios] = useState([])
 
-    const denuncias = await axios.get('http://localhost:3001/denuncias')
-    const data = denuncias.data;
+    useEffect(() => {
+        if (localStorage.getItem("Cargo") == "Admin") {
 
-    let contadorDenuncia = 0;
+        }
+        else if (localStorage.getItem("Cargo") != "Admin") {
+            window.location.replace("/login");
+        }
+    }, [])
+
+    useEffect(() => {
+        axios.get('http://localhost:3001/denuncias')
+            .then((response) => {
+                console.log(response.data)
+                setData(response.data)
+            })
+
+        axios.get('http://localhost:3001/usuarios')
+            .then((response) => {
+                console.log(response.data)
+                setDataUsuarios(response.data)
+            })
+
+    }, [])
+
     let numeroDenuncias = 0;
     data.map((item, index) => {
         numeroDenuncias = numeroDenuncias + 1
     })
-
-    const usuarios = await axios.get('http://localhost:3001/usuarios')
-    const dataUsuarios = usuarios.data;
+    let contadorDenuncia = 0;
 
 
 
@@ -47,7 +69,8 @@ export default async function Admin() {
 
                                                     )
                                                 }
-                                            })
+                                            }
+                                            )
                                         ) : (
                                             <>
                                                 carregando...
@@ -57,7 +80,7 @@ export default async function Admin() {
                                         <p>Foto: </p>
                                         {item.Foto ? (
                                             <>
-                                                <img style={{ paddingLeft: '30px' }} src={item.Foto} />
+                                                <img style={{ paddingLeft: '30px', width: '400px', height: '300px' }} src={item.Foto} />
                                             </>
                                         ) : (
                                             <>
@@ -78,7 +101,7 @@ export default async function Admin() {
                 </>
             )}
 
-            {dataUsuarios ? (
+            {/* {dataUsuarios ? (
                 <div>
                     <h1> Numero de usuários: {dataUsuarios.Id} </h1>
                     {dataUsuarios.map((item, index) => {
@@ -109,7 +132,7 @@ export default async function Admin() {
                 <>
                     carregando...
                 </>
-            )}
+            )} */}
 
         </>
     )

@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '../uploads/'));
+        cb(null, path.join(__dirname, '../../frontEnd/olho-na-rua/public'));
     },
     filename: (req, file, cb) => {
         const nomeArquivo = `${Date.now()}-${file.originalname}`;
@@ -22,8 +22,8 @@ const router = express.Router();
 
 router.get('/', listarDenunciasController)
 router.get('/:id', obterDenunciaPorIdDoUsuarioController);
-router.post('/', upload.single('foto'), criarDenunciaController);
-router.put('/:id', upload.single('foto'), atualizarDenunciaController);
+router.post('/', upload.single('Foto'), criarDenunciaController);
+router.put('/:id', upload.single('Foto'), atualizarDenunciaController);
 router.delete('/:id', excluirDenunciaController);
 
 export default router;

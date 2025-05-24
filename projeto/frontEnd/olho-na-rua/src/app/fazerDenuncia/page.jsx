@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react';
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
 
 function FormDenuncia() {
     const [form, setForm] = useState({
@@ -10,36 +9,52 @@ function FormDenuncia() {
         Localizacao: '',
         id_Usuario: '',
         Estado: 'Para análise',
-        Foto: ''
+        Foto: null
     });
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const { name, value, files } = e.target;
+
+        if (name === 'Foto') {
+            setForm({ ...form, Foto: files[0] });
+        } else {
+            setForm({ ...form, [name]: value });
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('Motivo', form.Motivo);
+        formData.append('Descricao', form.Descricao);
+        formData.append('Localizacao', form.Localizacao);
+        formData.append('id_Usuario', form.id_Usuario);
+        formData.append('Estado', form.Estado);
+
+        if (form.Foto) {
+            formData.append('Foto', form.Foto);
+        }
+
         try {
-            await axios.post('http://localhost:3001/denuncias', form);
-            alert('Denúncia enviada com sucesso!');
-        } catch (err) {
-            console.error(err);
-            alert('Erro ao enviar denúncia.');
+            const response = await axios.post('http://localhost:3001/denuncias', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            console.log(response.data);
+        } catch (error) {
+            console.error('Erro ao enviar:', error);
         }
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" id="Motivo" placeholder="Motivo" value={form.Motivo} onChange={handleChange} required />
-            <textarea id="Descricao" placeholder="Descrição" value={form.Descricao} onChange={handleChange} required />
-            <input type="text" id="Localizacao" placeholder="Localização" value={form.Localizacao} onChange={handleChange} required />
-            <input type="number" id="id_Usuario" placeholder="ID do Usuário" value={form.id_Usuario} onChange={handleChange} required />
-            <select id="Estado" value={form.Estado} onChange={handleChange}>
-                <option value="Para análise">Para análise</option>
-                <option value="Em andamento">Em andamento</option>
-                <option value="Concluida">Concluída</option>
-            </select>
-            <input type="file" id="Foto" value={form.Foto} onChange={handleChange} required />
+            <input type="text" id="Motivo" name="Motivo" placeholder="Motivo" onChange={handleChange} required />
+            <textarea id="Descricao" name="Descricao" placeholder="Descrição" onChange={handleChange} required />
+            <input type="text" id="Localizacao" name="Localizacao" placeholder="Localização" onChange={handleChange} required />
+            <input type="number" id="id_Usuario" name="id_Usuario" placeholder="ID do Usuário" onChange={handleChange} required />
+            <input type="file" id="Foto" name="Foto" onChange={handleChange} />
             <button type="submit">Enviar Denúncia</button>
         </form>
     );

@@ -34,17 +34,19 @@ const obterDenunciaPorIdDoUsuarioController = async (req, res) => {
 
 const criarDenunciaController = async (req, res) => {
     try {
-        const { motivo, descricao, localizacao, email } = req.body;
+        const { Motivo, Descricao, Localizacao, id_Usuario, Estado } = req.body;
+        const Foto = req.file ? req.file.filename : "";
         let fotoPath = null;
         if (req.file) {
             fotoPath = req.file.path.replace(__dirname.replace('\\controllers', ''), '')
         }
         const denunciaData = {
-            Motivo: motivo,
-            Descricao: descricao,
-            Localizacao: localizacao,
-            Email: email,
-            Foto: fotoPath
+            Motivo: Motivo,
+            Descricao: Descricao,
+            Localizacao: Localizacao,
+            id_Usuario: id_Usuario,
+            Estado: Estado,
+            Foto: Foto
         }
         const denunciaId = await criarDenuncia(denunciaData)
         res.status(201).json({ mensagem: 'Denuncia enviada com secesso.', denunciaId })
@@ -90,4 +92,4 @@ const excluirDenunciaController = async (req, res) => {
     }
 };
 
-export { listarDenunciasController,obterDenunciaPorIdDoUsuarioController, criarDenunciaController, atualizarDenunciaController, excluirDenunciaController }
+export { listarDenunciasController, obterDenunciaPorIdDoUsuarioController, criarDenunciaController, atualizarDenunciaController, excluirDenunciaController }
