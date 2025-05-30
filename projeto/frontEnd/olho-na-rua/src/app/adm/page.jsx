@@ -8,7 +8,9 @@ import { useEffect, useState } from "react";
 export default function Admin() {
     const [data, setData] = useState([])
     const [dataUsuarios, setDataUsuarios] = useState([])
+    const [adm, setAdm] = useState({})
 
+    
     useEffect(() => {
         if (localStorage.getItem("Cargo") == "Admin") {
 
@@ -19,16 +21,23 @@ export default function Admin() {
     }, [])
 
     useEffect(() => {
+        const Email = localStorage.getItem("Email")
+        const Senha = localStorage.getItem("Senha")
+
         axios.get('http://localhost:3001/denuncias')
             .then((response) => {
-                console.log(response.data)
                 setData(response.data)
             })
 
         axios.get('http://localhost:3001/usuarios')
             .then((response) => {
-                console.log(response.data)
                 setDataUsuarios(response.data)
+            })
+
+        axios.get(`http://localhost:3001/usuarios/${Email}/${Senha}`)
+            .then((response) => {
+                console.log(response.data)
+                setAdm(response.data.usuario)
             })
 
     }, [])
@@ -46,10 +55,18 @@ export default function Admin() {
             {data ? (
                 <div>
                     <h1> Painel de ADM </h1>
+                    {adm ? (
+                        <>
+                            <h5>conectado como: {adm.Nome}</h5>
+                        </>
+                    ) : (
+                        <>
+                            carregando...
+                        </>
+                    )}
                     <Link href="/logOut"> - sair - </Link>
                     <h1>Denuncias recebidas: {numeroDenuncias}</h1>
                     {data.map((item, index) => {
-                        console.log(item.id_Usuario)
                         if (dataUsuarios.Id == item.Id) {
                             return (
                                 <div key={index}>

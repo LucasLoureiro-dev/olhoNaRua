@@ -60,12 +60,23 @@ export default function Login() {
                 })
                     .then((response) => {
                         console.log(response.data);
-                        setMensagem(`${response.data.mensagem}!!! mandando você para a pagina de perfil`)
+                        console.log(response.data.token)
                         localStorage.setItem("token", response.data.token)
                         localStorage.setItem("Email", formData.Email)
                         localStorage.setItem("Senha", formData.Senha)
                         localStorage.setItem("Cargo", formData.Cargo)
-                        window.location.replace("/perfil");
+
+                        const cargo = localStorage.getItem("Cargo")
+                        // if (cargo == "Admin") {
+                        //     setMensagem(`${response.data.mensagem}!!! Bem-vindo ADM!!`)
+                        //     window.location.replace("/adm");
+                        // }
+                        // else {
+                        //     setMensagem(`${response.data.mensagem}!!! mandando você para a pagina de perfil`)
+                        //     window.location.replace("/perfil");
+                        // }
+
+
                     })
                     .catch((error) => {
                         console.log(error.response.data.mensagem)

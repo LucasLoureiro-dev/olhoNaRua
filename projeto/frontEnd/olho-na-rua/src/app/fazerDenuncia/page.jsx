@@ -37,9 +37,11 @@ function FormDenuncia() {
         }
 
         try {
+            const token = localStorage.getItem("token")
             const response = await axios.post('http://localhost:3001/denuncias', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer `
                 }
             });
             console.log(response.data);

@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS Usuarios(
  
 -- Inserir dados na tabela Usuarios
 INSERT INTO Usuarios (Nome, Email, Senha, Cargo) VALUES
-		("Arthur", 'arthur.benedetti@gmail.com', 'arthurB123', 'Admin'),
+		("Arthur", 'arthur.benedetti@gmail.com', '$2a$10$EGhjSaOCe6srMF8mBbZA1eYHTe5emjyEG4iKHbrf5H89cOK9cHCSG', 'Admin'),
 		("Lucas", 'lucas.loureiro@gmail.com', 'lucasL123', 'Usuario'),
 		("Eduarda", 'duda.pinho@gmail.com', 'eduardaP123', 'Usuario');
  

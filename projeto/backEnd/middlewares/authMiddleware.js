@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from '../config/jwt.js';
 
 const authMiddleware = (req, res, next) => {
 
@@ -6,8 +7,7 @@ const authMiddleware = (req, res, next) => {
 
     if (!authHeader) {
 
-        return res.status(401).json({
-            mensagem: 'Não autorizado: Token não fornecido' });
+        return res.status(401).json({mensagem: 'Não autorizado: Token não fornecido' });
 
 }
  

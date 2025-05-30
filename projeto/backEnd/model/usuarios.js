@@ -13,8 +13,20 @@ const listarUsuarios = async () => {
 const obterUsuarioPorEmail = async (email, senha) => {
     try {
 
-        return await read('Usuarios', `Email = '${email}' AND Senha = '${senha}'`)
+        let mensagem = { mensagem: '' }
 
+        const usuario = await read('usuarios', `Email = '${email}'`);
+
+        if (!usuario) {
+            mensagem = { mensagem: 'Usuário não encontrado' }
+        }
+        const senhaCorreta = await compare(senha, usuario.Senha);
+        if (!senhaCorreta) {
+            mensagem = { mensagem: 'Senha incorreta' }
+        }
+
+        mensagem = { mensagem: 'Usuário encontrado', usuario }
+        return mensagem;
     }
     catch (error) {
         console.error("Erro ao obter a usuário pelo email: ", error);
