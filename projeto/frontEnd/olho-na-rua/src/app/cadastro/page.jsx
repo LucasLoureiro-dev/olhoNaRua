@@ -1,10 +1,11 @@
 "use client"
 import axios from "axios";
-import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import bcrypt from "bcryptjs";
-import crypto from 'crypto'
+import crypto from 'crypto';
+import "bootstrap/dist/css/bootstrap.min.css";
+import './cadastro.css';
 
 async function hashSenha(senha) {
     const password = senha; // Substitua pela senha que você deseja hashear
@@ -27,20 +28,6 @@ function Cadastro() {
         Email: '',
         Senha: '',
     });
-
-    useEffect(() => {
-        if (localStorage.getItem("token") == null || localStorage.getItem("token") == "") {
-
-        }
-        else if (localStorage.getItem("Cargo") == "Usuario" && localStorage.getItem("token") != null) {
-            window.location.replace("/perfil");
-        }
-        else if (localStorage.getItem("Cargo") == "Admin" && localStorage.getItem("token") != null) {
-            window.location.replace("/adm");
-        }
-    }, [])
-
-
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -68,7 +55,7 @@ function Cadastro() {
             })
                 .then((response) => {
                     console.log(response.data);
-                    setMensagem(`${response.data.mensagem}!!! te redirecionando para pagina de login!`)
+                    setMensagem(`${response.data.mensagem}redirecionando para pagina de login!`)
                     window.location.replace("/login");
                 })
         } catch (error) {
@@ -78,18 +65,45 @@ function Cadastro() {
 
 
     return (
-        <div>
-            <p><Link href="/">Pagina inicial</Link></p>
-            <p><Link href="/login/">Fazer login</Link></p>
-            <h1>Cadastro</h1>
-            <form onSubmit={handleSubmit}>
-                <p>Nome: <input type="text" name="Nome" placeholder="Seu nome" onChange={handleChange} /></p>
-                <p>Email: <input type="email" name="Email" placeholder="email@example.com" onChange={handleChange} /></p>
-                <p>Senha: <input type="password" name="Senha" placeholder="Senhalegal123" onChange={handleChange} /></p>
-                <button type="submit">Cadastrar</button>
-                <p>{mensagem}</p>
-            </form>
-        </div>
+        <>
+            <div className="lado1 container d-flex justify-content-center align-items-center">
+                {/*login */}
+                <div className="mt-5">
+                    <p className="title">Cadastro</p>
+                    <form className="form" onSubmit={handleSubmit}>
+                        <div className="input-group">
+                            <label htmlFor="username" onChange={handleChange}>Nome:</label>
+                            <input type="text" name="Nome" placeholder="Seu nome" onChange={handleChange} />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="username" onChange={handleChange}>Email:</label>
+                            <input type="email" name="Email" placeholder="email@gmail.com" onChange={handleChange} />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="username" onChange={handleChange}>Telefone:</label>
+                            <input type="text" name="Telefone" placeholder="11 99999-9999" onChange={handleChange} />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="password">Senha:</label>
+                            <input type="password" name="Senha" placeholder="SuaSenha123" onChange={handleChange} />
+                        </div>
+                        <div className="forgot">
+                            <a rel="noopener noreferrer" href="./login/">
+                                Ja tem cadastro ?
+                            </a>
+                        </div>
+                        <button type="submit" className="sign">Cadastra-se</button>
+                    </form>
+                    <div className="social-message">
+                        <div className="line" />
+                        <p className="message">{mensagem}</p>
+                        <div className="line" />
+                    </div>
+                </div>
+            </div>
+
+
+        </>
     )
 }
 export default Cadastro;

@@ -1,0 +1,269 @@
+/*VARIÁVEL COM A FONTE E AS CORES MAIS UTILIZADAS*/
+:root {
+    --preto: #000000;
+    --branco: #ffffff;
+    --amareloClaro: #ffdb57;
+    --amareloEscuro: #ffd449;
+    --azulClaro: #00509d;
+    --azulEscuro: #11296b;
+    --cinza: #ededed;
+    --fonte: "Inter", sans-serif;
+}
+
+/*CONFIGURAÇÕES E ESTILIZAÇÃO DA PRIMEIRA SEÇÃO*/
+.introducao {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tituloInicio {
+    width: 90%;
+    margin-top: 5rem;
+    margin-left: 6rem;
+}
+
+.tituloInicio h1 {
+    font-weight: bold;
+    font-family: var(--fonte);
+    font-size: 50px;
+}
+
+.subtitulo {
+    width: 90%;
+    margin-left: 6rem;
+    margin-top: 1.5rem;
+}
+
+.subtitulo h5 {
+    font-weight: bold;
+    font-family: var(--fonte);
+    font-size: 20px;
+}
+
+.texto {
+    width: 70%;
+    margin-left: 6rem;
+    margin-top: 1.5rem;
+}
+
+.texto p {
+    font-family: var(--fonte);
+}
+
+/*Estilização da linha amarela*/
+.amarelo {
+    color: var(--amareloEscuro);
+}
+
+.linhaAmarela {
+    width: 87%;
+    height: 5px;
+    background-color: var(--amareloClaro);
+    margin-top: 2rem;
+    margin-left: 5rem;
+    border: none;
+}
+
+/*CONFIGURAÇÕES E ESTILIZAÇÃO DA SEÇÃO DE 'SUAS INFORMAÇÕES'*/
+/*Estilização dos títulos de 'Suas informações' e 'Suas denúncias'*/
+.tituloInformacoesDenuncias {
+    margin-left: 6rem;
+    margin-top: 4rem;
+}
+
+.tituloInformacoesDenuncias p {
+    font-family: var(--fonte);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/*Configurações e estilização dos dados*/
+.dadosUsuarios {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 6rem;
+    margin-top: 3rem;
+}
+
+/*Configurações e estilização dos dados ao lado esquerdo*/
+.ladoEsquerdo {
+    width: 50%;
+    margin-left: 6rem;
+    margin-top: 1.5rem;
+}
+
+.ladoEsquerdo p {
+    font-family: var(--fonte);
+    font-size: 16px;
+    margin-bottom: 2rem;
+}
+
+/*Configurações dos títulos em negrito*/
+.negrito {
+    color: var(--preto);
+    font-weight: bold;
+}
+
+/*Configurações e estilização dos dados ao lado direito*/
+.ladoDireito {
+    width: 50%;
+    margin-left: 6rem;
+    align-self: flex-start;
+    margin-top: 1.5rem;
+}
+
+.ladoDireito p {
+    font-family: var(--fonte);
+    font-size: 16px;
+    margin-bottom: 2rem;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem 6rem;
+}
+
+/*Estilização do botão*/
+.botoes {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+}
+
+/*Estilização do botão de excluir*/
+.botaoExcluir {
+    padding: 0.95rem 4rem;
+    background-color: var(--amareloEscuro);
+    color: var(--preto);
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: var(--fonte);
+    margin-top: 2rem;
+    margin-right: 1.5rem;
+}
+
+.botaoExcluir:hover {
+    background-color: var(--amareloClaro);
+}
+
+/*Estilização do botão de editar*/
+.botaoEditar {
+    padding: 0.95rem 4rem;
+    background-color: var(--amareloEscuro);
+    color: var(--preto);
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: var(--fonte);
+    margin-top: 2rem;
+    margin-right: 1.5rem;
+}
+
+.botaoEditar:hover {
+    background-color: var(--amareloClaro);
+}
+
+
+/*RESPONSIVIDADE*/
+/*Responsividade para resolução máxima de 1024px*/
+@media (max-width: 1024px) {
+
+    .tituloInicio,
+    .subtitulo,
+    .texto,
+    .linhaAmarela,
+    .tituloInformacoesDenuncias {
+        margin-left: 3rem;
+        width: 90%;
+    }
+
+    .dadosUsuarios {
+        flex-direction: column;
+        padding: 0 3rem;
+    }
+
+    .ladoEsquerdo,
+    .ladoDireito {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .botoes {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/*Responsividade para resolução máxima de 768px*/
+@media (max-width: 768px) {
+    .tituloInicio h1 {
+        font-size: 36px;
+    }
+
+    .subtitulo h5 {
+        font-size: 18px;
+    }
+
+    .texto {
+        width: 85%;
+    }
+
+    .dadosUsuarios {
+        padding: 0 2rem;
+    }
+
+    .tituloInformacoesDenuncias {
+        margin-left: 2rem;
+    }
+
+    .linhaAmarela {
+        margin-left: 2rem;
+        width: 90%;
+    }
+}
+
+/*Responsividade para resolução máxima de 480px (celulares)*/
+@media (max-width: 480px) {
+    .tituloInicio h1 {
+        font-size: 28px;
+    }
+
+    .subtitulo h5 {
+        font-size: 16px;
+    }
+
+    .texto p,
+    .ladoEsquerdo p,
+    .ladoDireito p {
+        font-size: 14px;
+    }
+
+    .tituloInformacoesDenuncias p {
+        font-size: 16px;
+    }
+
+    .texto,
+    .tituloInicio,
+    .subtitulo,
+    .tituloInformacoesDenuncias,
+    .linhaAmarela {
+        margin-left: 1rem;
+        width: 90%;
+    }
+
+    .dadosUsuarios {
+        padding: 0 1rem;
+    }
+
+    .cards{
+        margin-left: -4rem;
+    }
+}

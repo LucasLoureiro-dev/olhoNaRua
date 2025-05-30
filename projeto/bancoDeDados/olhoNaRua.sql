@@ -7,31 +7,35 @@ CREATE TABLE IF NOT EXISTS Usuarios(
 	Id INT PRIMARY KEY AUTO_INCREMENT,
     Nome VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL,
+    Telefone VARCHAR(15) NOT NULL,
     Senha VARCHAR(150) NOT NULL,
     Cargo VARCHAR(100) NOT NULL
 );
  
 -- Inserir dados na tabela Usuarios
-INSERT INTO Usuarios (Nome, Email, Senha, Cargo) VALUES
-		("Arthur", 'arthur.benedetti@gmail.com', '$2a$10$EGhjSaOCe6srMF8mBbZA1eYHTe5emjyEG4iKHbrf5H89cOK9cHCSG', 'Admin'),
-		("Lucas", 'lucas.loureiro@gmail.com', 'lucasL123', 'Usuario'),
-		("Eduarda", 'duda.pinho@gmail.com', 'eduardaP123', 'Usuario');
+INSERT INTO Usuarios (Nome, Email, Telefone, Senha, Cargo) VALUES
+		("Arthur", 'arthur.benedetti@gmail.com', '11 987654328', '$2a$12$2bUGLYcqrs38QZBPPAMZWeDvLw5Ua4nHt541Zx.plM48K5QS7wctS', 'Admin'),
+		("Lucas", 'lucas.loureiro@gmail.com', '14 912345678', '$2a$12$zc6CvaRunYGtkWrE8eWdjuAvTsslPSiAhXMpRRE132XNq6lil0JsG', 'Usuario'),
+        ("Mario Garcia Alvez de Sezamo", 'marioGarcia@gmail.com', '14 912876637', '$2a$12$Ry2n/Veq8hDY5vgfycfuw.8jLDwBLqetw8W3bM2rDt3jE6gYjU1JO', 'Usuario'),
+		("Eduarda", 'duda.pinho@gmail.com', '22 913579246', '$2a$12$dqLnXomIU.FlWH7X082zY.Aw9T4mq7fUGU35gLYxmNKmJilgdFQ0O', 'Usuario');
  
 -- Tabela Denuncias
 CREATE TABLE IF NOT EXISTS Denuncias (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    Motivo VARCHAR(255) NOT NULL,
-    Descricao VARCHAR(255) NOT NULL,
-    Localizacao VARCHAR(255) NOT NULL,
+    Cep VARCHAR(255) NOT NULL,
+    Bairro VARCHAR(255) NOT NULL,
+    Rua VARCHAR(255) NOT NULL,
+    Ponto_de_referencia VARCHAR(400) NOT NULL,
+    Data_da_denuncia DATE NOT NULL,
+    Relato VARCHAR(400) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
     id_Usuario INT,
     Estado ENUM('Para analise', 'Em andamento', 'Concluida') NOT NULL,
     Foto VARCHAR(255) NOT NULL,
     FOREIGN KEY (id_Usuario) REFERENCES Usuarios(Id)
 );
 -- Inserir dados na tabela Denuncias
-INSERT INTO Denuncias (Motivo, Descricao, Localizacao,  id_usuario, Estado, Foto) VALUES
-		('Arvore Caida', 'Arvore caida na praça Verde', 'Rua Benedetido Gonsalves', '2', 'Em andamento','Arvore.jpg'),
-		('Alagamento', 'Alagamento gerado pela chuva de ontem', 'Rua Alvarez da silva', '1', 'Concluida','Alagamento.jpg'),
-        ('Entulho', 'Entulho no acostamento da Avenida sul', 'Avenida sul', '3', 'Para analise',''),
-		('Saneamento', 'Falta de saneamento da rua das flores', 'Rua das Flores 650', '3', 'Para analise','')
-        
+INSERT INTO Denuncias ( Cep, Bairro, Rua, Ponto_de_referencia, Data_da_denuncia, Relato, Email, id_usuario, Estado, Foto) VALUES
+		('03208-020', 'vila lobo', 'Rua Alameda Costa', 'Palmeira alta', '2025/05/30', 'Acumulo de lixo barrando a passagem do trafego', 'lucas.loureiro@gmail.com', '2', 'Para analise','Arvore.jpg'),
+        ('03208-020', 'vila lobo', 'Rua Alameda Costa', 'carro quebrado', '2025/05/30', 'Acumulo de lixo barrando a passagem do trafego', 'marioGarcia@gmail.com','3', 'Para analise',''),
+		('03208-020', 'vila lobo', 'Rua Alameda Costa', 'Palmeira alta', '2025/05/30', 'Acumulo de lixo barrando a passagem do trafego', 'duda.pinho@gmail.com','4', 'Para analise','')

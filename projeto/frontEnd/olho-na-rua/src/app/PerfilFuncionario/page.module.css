@@ -1,0 +1,176 @@
+/*VARIÁVEL COM A FONTE E AS CORES MAIS UTILIZADAS*/
+:root {
+    --preto: #000000;
+    --branco: #ffffff;
+    --amareloClaro: #ffdb57;
+    --amareloEscuro: #ffd449;
+    --azulClaro: #00509d;
+    --azulEscuro: #11296b;
+    --cinza: #ededed;
+    --fonte: "Inter", sans-serif;
+}
+
+/*CONFIGURAÇÕES E ESTILIZAÇÃO DA SEÇÃO DE INFORMAÇÕES PESSOAIS*/
+.container {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 30px 50px;
+}
+
+.tituloPagina h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-family: var(--fonte);
+    font-weight: bold;
+}
+
+.subtitulo h5 {
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    font-family: var(--fonte);
+    font-weight: bold;
+}
+
+.linhaDecoracao {
+    height: 4px;
+    background-color: #FFD700;
+    margin: 30px 0;
+    border-radius: 2px;
+}
+
+/*Estilização das informações*/
+.infos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
+    margin-top: 3rem;
+}
+
+.infos div {
+    padding: 5px 0;
+}
+
+.tituloInfos p {
+    font-weight: bold;
+    font-family: var(--fonte);
+    display: block;
+    font-size: 15px;
+}
+
+.textoInfos p {
+    font-family: var(--fonte);
+    display: block;
+    font-size: 15px;
+}
+
+/*CONFIGURAÇÕES E ESTILIZAÇÃO DA SEÇÃO DE RESPONSABILIDADES PRINCIPAIS*/
+.responsabilidades p {
+    font-family: var(--fonte);
+    font-size: 17px;
+    margin-top: 3rem;
+}
+
+.responsabilidades ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.responsabilidades li {
+    margin-bottom: 8px;
+    font-family: var(--fonte);
+}
+
+/*RESPONSIVIDADE*/
+/*Responsividade para resolução máxima de 1024px*/
+@media (max-width: 1024px) {
+    .container {
+        max-width: 80%;
+        padding: 25px 40px;
+    }
+
+    .infos {
+        gap: 15px 30px;
+    }
+
+    .responsabilidades p{
+        text-align: justify;
+    }
+
+    .responsabilidades li{
+        text-align: justify;
+    }
+}
+
+/*Responsividade para resolução máxima de 768px*/
+@media (max-width: 768px) {
+    .container {
+        padding: 20px 30px;
+    }
+
+    .infos {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .tituloPagina h1 {
+        font-size: 26px;
+        text-align: center;
+    }
+
+    .subtitulo h5 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .responsabilidades p{
+        text-align: justify;
+    }
+
+    .responsabilidades li{
+        text-align: justify;
+    }
+}
+
+/*Responsividade para resolução máxima de 480px (celulares)*/
+@media (max-width: 480px) {
+    .container {
+        padding: 15px 20px;
+    }
+
+    .tituloPagina h1 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .subtitulo h5 {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .infos {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .tituloInfos p {
+        font-size: 14px;
+    }
+
+    .textoInfos p{
+        font-size: 12px;
+    }
+
+    .responsabilidades p{
+        text-align: justify;
+        font-size: 15px;
+    }
+
+    .responsabilidades ul{
+        margin-left: -1rem;
+    }
+
+    .responsabilidades li{
+        text-align: justify;
+    }
+}

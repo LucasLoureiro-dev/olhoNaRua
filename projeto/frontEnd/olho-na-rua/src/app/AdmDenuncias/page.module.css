@@ -1,0 +1,93 @@
+/*VARIÁVEL COM A FONTE E AS CORES MAIS UTILIZADAS*/
+:root {
+    --preto: #000000;
+    --branco: #ffffff;
+    --amareloClaro: #ffdb57;
+    --amareloEscuro: #ffd449;
+    --azulClaro: #00509d;
+    --azulEscuro: #11296b;
+    --cinza: #ededed;
+    --fonte: "Inter", sans-serif;
+}
+
+/*CONFIGURAÇÕES E ESTILIZAÇÃO DO TÍTULO E DO SUBTÍTULO*/
+.inicio{
+    display: flex;
+    flex-direction: column;
+    margin-left: 6rem;
+    margin-top: 5rem;
+}
+
+.titulo h1{
+    font-family: var(--fonte);
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.subtitulo p{
+    font-family: var(--fonte);
+    font-size: 15px;
+    margin-top: 1rem;
+}
+
+/*CONFIGURAÇÕES DOS CARDS*/
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem 6rem;
+}
+
+/*RESPONSIVIDADE*/
+/*Responsividade para resolução máxima de 1024px*/
+@media (max-width: 1024px) {
+    .inicio {
+        margin-left: 3rem; 
+        margin-top: 3rem;
+    }
+
+    .titulo h1 {
+        font-size: 26px; 
+    }
+
+    .subtitulo p {
+        font-size: 14px;
+    }
+}
+
+/*Responsividade para resolução máxima de 768px*/
+@media (max-width: 768px) {
+    .inicio {
+        margin-left: 1.5rem; 
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .titulo h1 {
+        font-size: 22px;
+    }
+
+    .subtitulo p {
+        font-size: 13px;
+        margin-top: 0.5rem;
+    }
+}
+
+/*Responsividade para resolução máxima de 480px (celulares)*/
+@media (max-width: 480px) {
+    .inicio {
+        margin-left: 1rem; 
+        margin-right: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .titulo h1 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .subtitulo p {
+        font-size: 12px;
+        text-align: center;
+    }
+}

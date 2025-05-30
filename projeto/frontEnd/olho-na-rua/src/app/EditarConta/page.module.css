@@ -1,0 +1,182 @@
+/*VARIÁVEL COM A FONTE E AS CORES MAIS UTILIZADAS*/
+:root {
+    --preto: #000000;
+    --branco: #ffffff;
+    --amareloClaro: #ffdb57;
+    --amareloEscuro: #ffd449;
+    --azulClaro: #00509d;
+    --azulEscuro: #11296b;
+    --cinza: #ededed;
+    --fonte: "Inter", sans-serif;
+}
+
+/*CONFIGURAÇÕES E ESTILIZAÇÃO DO TÍTULO*/
+.titulo {
+    width: 100%;
+}
+
+.titulo h1 {
+    font-family: var(--fonte);
+    font-weight: bold;
+    font-size: 30px;
+    margin-left: 6rem;
+    margin-top: 5rem;
+}
+
+/* FORMULÁRIO E CAMPOS */
+.formulario {
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 500px;
+    font-family: var(--fonte);
+}
+
+.campos label {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+/* Input padrão */
+.inputPadrao {
+    padding: 0.75rem;
+    border: 1px solid #333;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Inputs lado a lado (email e telefone) */
+.linhaCampos {
+    display: flex;
+    gap: 1rem;
+}
+
+.linhaCampos>div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Texto política de privacidade */
+.politica {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 1.5rem;
+}
+
+/* Botões */
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.botaoSalvar,
+.botaoCancelar {
+    padding: 0.75rem 2.5rem;
+    background-color: var(--amareloClaro);
+    color: var(--preto);
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.botaoSalvar:hover,
+.botaoCancelar:hover {
+    background-color: var(--amareloEscuro);
+}
+
+/*RESPONSIVIDADE*/
+/*Responsividade para resolução máxima de 1024px*/
+@media (max-width: 1024px) {
+    .titulo h1 {
+        font-size: 26px;
+        margin-left: 3rem;
+        margin-top: 4rem;
+    }
+
+    .formulario {
+        margin-top: 8rem;
+    }
+
+    .campos {
+        max-width: 640px;
+        padding: 0 2rem;
+    }
+}
+
+/*Responsividade para resolução máxima de 768px*/
+@media (max-width: 768px) {
+    .titulo h1 {
+        font-size: 24px;
+        margin-left: 2rem;
+        margin-top: 3rem;
+        text-align: center;
+    }
+
+    .campos {
+        max-width: 640px;
+        padding: 0 2rem;
+    }
+
+    .linhaCampos {
+        flex-direction: column;
+    }
+
+    .botoes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botaoSalvar,
+    .botaoCancelar {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/*Responsividade para resolução máxima de 480px (celulares)*/
+@media (max-width: 480px) {
+    .titulo h1 {
+        font-size: 22px;
+        margin-left: 0;
+        margin-top: 2rem;
+        text-align: center;
+    }
+
+    .formulario {
+        margin-top: 2rem;
+    }
+
+    .campos {
+        padding: 0 1rem;
+    }
+
+    .inputPadrao {
+        font-size: 0.80rem;
+        padding: 0.50rem;
+    }
+
+    .botaoSalvar,
+    .botaoCancelar {
+        font-size: 0.95rem;
+        padding: 0.65rem 2rem;
+    }
+
+    .politica {
+        font-size: 0.8rem;
+    }
+}

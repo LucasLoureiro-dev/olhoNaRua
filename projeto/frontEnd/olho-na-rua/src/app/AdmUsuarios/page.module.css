@@ -1,0 +1,176 @@
+/*VARIÁVEL COM A FONTE E AS CORES MAIS UTILIZADAS*/
+:root {
+    --preto: #000000;
+    --branco: #ffffff;
+    --amareloClaro: #ffdb57;
+    --amareloEscuro: #ffd449;
+    --azulClaro: #00509d;
+    --azulEscuro: #11296b;
+    --cinza: #ededed;
+    --fonte: "Inter", sans-serif;
+}
+
+/*CONFIGURAÇÕES E ESTILIZAÇÃO DO TÍTULO E DO SUBTÍTULO*/
+.inicio {
+    display: flex;
+    flex-direction: column;
+    margin-left: 6rem;
+    margin-top: 5rem;
+}
+
+.titulo h1 {
+    font-family: var(--fonte);
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.subtitulo p {
+    font-family: var(--fonte);
+    font-size: 15px;
+    margin-top: 1rem;
+}
+
+/*CONFIGURAÇÕES E ESTILIZAÇÃO DA TABELA*/
+.tabela {
+    width: 80%;
+    border-collapse: collapse;
+    font-family: var(--fonte);
+    background-color: var(--branco);
+    margin-left: 8rem;
+    margin-top: 4rem;
+}
+
+/*Estilização dos campos da tabela*/
+.tabela th,
+.tabela td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabela th {
+    font-weight: bold;
+}
+
+/*Estilização do botão*/
+.botao {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 0.75rem;
+}
+
+/*Estilizaçaõ do ícone de apagar conta*/
+.material-symbols-outlined {
+    font-size: 20px;
+    vertical-align: middle;
+    color: var(--preto);
+}
+
+/*RESPONSIVIDADE*/
+/* Responsividade para resolução máxima de 1024px */
+@media (max-width: 1024px) {
+    .inicio {
+        margin-left: 3rem;
+    }
+
+    .tabela {
+        width: 90%;
+        margin-left: 3rem;
+    }
+}
+
+/* Responsividade para resolução máxima de 768px */
+@media (max-width: 768px) {
+    .inicio {
+        margin-left: 2rem;
+        margin-top: 3rem;
+    }
+
+    .titulo h1 {
+        font-size: 24px;
+    }
+
+    .subtitulo p {
+        font-size: 14px;
+    }
+
+    .tabela {
+        width: 95%;
+        margin-left: 2rem;
+    }
+
+    .tabela th,
+    .tabela td {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+}
+
+/* Responsividade para resolução máxima de 480px (celulares) */
+@media (max-width: 480px) {
+    .inicio {
+        margin-left: 1rem;
+        margin-top: 4rem;
+    }
+
+    .titulo h1 {
+        font-size: 20px;
+    }
+
+    .subtitulo {
+        width: 95%;
+    }
+
+    .subtitulo p {
+        font-size: 13px;
+    }
+
+    .tabela {
+        width: 90%;
+        margin-left: 1rem;
+        margin-top: 1.5rem;
+        border: 0;
+    }
+
+    .tabela thead {
+        display: none;
+    }
+
+    .tabela tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .tabela td {
+        display: block;
+        text-align: right;
+        font-size: 14px;
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+    }
+
+    .tabela td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-weight: bold;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .botao {
+        font-size: 16px;
+    }
+
+    .material-symbols-outlined {
+        font-size: 18px;
+    }
+}

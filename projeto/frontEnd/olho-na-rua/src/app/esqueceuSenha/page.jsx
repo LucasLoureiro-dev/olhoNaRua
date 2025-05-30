@@ -1,7 +1,7 @@
 "use client"
 import axios from "axios";
 import Link from "next/link";
-import './login.css';
+import './esqueceuSenha.css';
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -82,43 +82,46 @@ export default function Login() {
 
     return (
         <>
-            <div className="tudo">
-                <div className="lado1 container d-flex justify-content-center align-items-center">
-                    {/*login */}
-                    <div className="mt-5">
-
-
-                        <p className="title">Login</p>
-
-                        <form className="form" onSubmit={handleSubmit}>
-                            <div className="input-group">
-                                <label htmlFor="username" onChange={handleChange}>Email:</label>
-                                <input type="email" name="Email" placeholder="meuEmail@example.com" onChange={handleChange} />
-                            </div>
-                            <div className="input-group">
-                                <label htmlFor="password">Senha:</label>
-                                <input type="password" name="Senha" placeholder="SuaSenha123" onChange={handleChange} />
-                                <div className="input-group">
-                                    <select className="Cargo" name="Cargo" onChange={handleChange}>
-                                        <option value="Usuario">Usuário</option>
-                                        <option value="Admin">Admin</option>
-                                    </select>
-                                </div>
-                                <div className="Opcao">
-                                    <Link href="./cadastro/" type="button" className="sign Login no-decoration">Cadastrar-se</Link>
-                                    <Link href="./esqueceuSenha/" type="button" className="sign EsqueceuSenha no-decoration">Esqueceu a senha ?</Link>
-                                </div>
-                            </div>
-                            <button type="submit" className="sign">Login</button>
-                        </form>
-                        <div className="social-message">
-                            <div className="line" />
-                            <p className="message">{mensagem}</p>
-                            <div className="line" />
+            <div className="lado1 container d-flex justify-content-center align-items-center">
+                {/*login */}
+                <div className="box-EsqueceuSenha">
+                    <img className="cadeado" src="./cadeado.png" alt="" />
+                    <p className="title">Esqueceu senha</p>
+                    <form className="form" onSubmit={handleSubmit}>
+                        <div className="input-group">
+                            <label htmlFor="password">Coloque seu email:</label>
+                            <input type="password" name="Senha" placeholder="meuEmail@gmail.com" onChange={handleChange} />
                         </div>
+                        <div className="input-group">
+                            <label htmlFor="password">Coloque sua nova senha:</label>
+                            <input type="password" name="Senha" placeholder="SuaSenha123" onChange={handleChange} />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="password">Confirme sua nova senha:</label>
+                            <input type="password" name="Senha" placeholder="SuaSenha123" onChange={handleChange} />
+                        </div>
+                        <button type="submit" className="sign Registrar">Registrar</button>
+                        <a href="./login/" className="sign Voltar">Voltar</a>
+                    </form>
+
+                    <div className="social-message">
+                        <div className="line" />
+                        <p className="message">{mensagem}</p>
+                        <div className="line" />
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
         </>
     )
 }

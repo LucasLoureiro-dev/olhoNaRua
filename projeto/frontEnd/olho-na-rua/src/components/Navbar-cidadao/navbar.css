@@ -1,0 +1,40 @@
+@media (max-width: 768px) {
+    nav.menu-nav {
+      display: none !important;
+      flex-direction: column;
+      width: 100%;
+      background-color: #ffd449;
+      margin-top: 1rem;
+      padding: 1rem 0;
+      border-radius: 20px;
+    }
+  
+    nav.menu-nav.open {
+      display: flex !important;
+    }
+  
+    button.menu-toggle {
+      display: block !important; 
+    }
+  
+    nav.menu-nav a {
+      padding: 0.5rem 1.5rem;
+      width: 100%;
+    }
+  
+    .menu-nav {
+      flex: 100%;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    nav.menu-nav {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: center;
+    }
+  
+    button.menu-toggle {
+      display: none !important; 
+    }
+  }
