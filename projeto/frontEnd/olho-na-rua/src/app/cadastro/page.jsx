@@ -2,66 +2,94 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import bcrypt from "bcryptjs";
+import crypto from 'crypto'
 
-export default function Cadastro() {
+async function hashSenha(senha) {
+    const password = senha; // Substitua pela senha que você deseja hashear
+    try {
+        const salt = await bcrypt.genSalt(10);
+
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        return hashedPassword;
+    } catch (error) {
+        console.error('Erro ao hashear a senha:', error);
+    }
+}
+
+function Cadastro() {
+    const [mensagem, setMensagem] = useState('')
+
+    const [form, setForm] = useState({
+        Nome: '',
+        Email: '',
+        Senha: '',
+    });
 
     useEffect(() => {
-        if (localStorage.getItem("Email") == null) {
+        if (localStorage.getItem("token") == null || localStorage.getItem("token") == "") {
 
         }
-        else if (localStorage.getItem("Cargo") == "Usuario") {
+        else if (localStorage.getItem("Cargo") == "Usuario" && localStorage.getItem("token") != null) {
             window.location.replace("/perfil");
         }
-        else if (localStorage.getItem("Cargo") == "Admin") {
+        else if (localStorage.getItem("Cargo") == "Admin" && localStorage.getItem("token") != null) {
             window.location.replace("/adm");
         }
     }, [])
 
-    const { register, handleSubmit, resetField, formState: { errors } } = useForm({
-        mode: "onChange",
-        defaultValues: {
-            Email: "",
-            Senha: ""
-        },
-    });
 
-    const onSubmit = async (data) => {
-        console.log(data)
 
-        const { Email, Senha } = data;
+    const handleChange = (e) => {
+        const { name, value } = e.target;
 
-        const cadastroBody = {
-            Email: Email,
-            Senha: Senha
+        setForm({ ...form, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(form)
+        const senhaParaHashear = form.Senha
+        const senhaHasheada = await hashSenha(senhaParaHashear)
+
+        const formData = {
+            Nome: form.Nome,
+            Email: form.Email,
+            Senha: senhaHasheada
         }
 
-        console.log(cadastroBody)
-
-
-
-        await axios.post('http://localhost:3001/usuarios', cadastroBody)
-            .then((response) => {
-                console.log(JSON.stringify(response.data))
-                const responseToString = JSON.stringify(response.data.mensagem)
-                alert(JSON.stringify(response.data.mensagem) + " Seu id é: " + response.data.usuarioId + ", te redirecionando para a pagina de login!")
-                resetField("Email")
-                resetField('Senha')
-                window.location.replace("/login");
+        try {
+            await axios.post('http://localhost:3001/usuarios', formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
-    }
+                .then((response) => {
+                    console.log(response.data);
+                    setMensagem(`${response.data.mensagem}!!! te redirecionando para pagina de login!`)
+                    window.location.replace("/login");
+                })
+        } catch (error) {
+            console.error('Erro ao enviar:', error);
+        }
+    };
+
 
     return (
-        <>
+        <div>
             <p><Link href="/">Pagina inicial</Link></p>
             <p><Link href="/login/">Fazer login</Link></p>
             <h1>Cadastro</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <p>Email: <input type="email" {...register("Email", { required: true })} placeholder="email@example.com" /></p>
-                <p>Senha: <input type="password" {...register("Senha", { required: true })} placeholder="Senhalegal123" /></p>
-                <button type="submit">Fazer login</button>
-                {errors.Email && errors.Senha && <p> Insira EMAIL e SENHA!! </p> || errors.Email && <p> Insira EMAIL!! </p> || errors.Senha && <p> Insira SENHA!! </p>}
+            <form onSubmit={handleSubmit}>
+                <p>Nome: <input type="text" name="Nome" placeholder="Seu nome" onChange={handleChange} /></p>
+                <p>Email: <input type="email" name="Email" placeholder="email@example.com" onChange={handleChange} /></p>
+                <p>Senha: <input type="password" name="Senha" placeholder="Senhalegal123" onChange={handleChange} /></p>
+                <button type="submit">Cadastrar</button>
+                <p>{mensagem}</p>
             </form>
-        </>
+        </div>
     )
 }
+export default Cadastro;

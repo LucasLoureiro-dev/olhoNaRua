@@ -43,6 +43,7 @@ function FormDenuncia() {
                 }
             });
             console.log(response.data);
+            alert("Denuncia feita com sucesso")
         } catch (error) {
             console.error('Erro ao enviar:', error);
         }

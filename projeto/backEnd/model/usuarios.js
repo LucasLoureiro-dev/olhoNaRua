@@ -1,4 +1,4 @@
-import { create, deleteRecord, read, readAll, update } from "../config/database.js";
+import { create, deleteRecord, read, readAll, update, compare } from "../config/database.js";
 
 const listarUsuarios = async () => {
     try {
@@ -12,7 +12,9 @@ const listarUsuarios = async () => {
 
 const obterUsuarioPorEmail = async (email, senha) => {
     try {
+
         return await read('Usuarios', `Email = '${email}' AND Senha = '${senha}'`)
+
     }
     catch (error) {
         console.error("Erro ao obter a usuário pelo email: ", error);

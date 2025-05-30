@@ -3,6 +3,7 @@ import multer from 'multer'
 import { listarDenunciasController, obterDenunciaPorIdDoUsuarioController, criarDenunciaController, atualizarDenunciaController, excluirDenunciaController } from '../controllers/DenunciaController.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import authMiddleware from '../middlewares/authMiddleware.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,8 +23,8 @@ const router = express.Router();
 
 router.get('/', listarDenunciasController)
 router.get('/:id', obterDenunciaPorIdDoUsuarioController);
-router.post('/', upload.single('Foto'), criarDenunciaController);
-router.put('/:id', upload.single('Foto'), atualizarDenunciaController);
-router.delete('/:id', excluirDenunciaController);
+router.post('/', authMiddleware, upload.single('Foto'), criarDenunciaController);
+router.put('/:id', authMiddleware, upload.single('Foto'), atualizarDenunciaController);
+router.delete('/:id', authMiddleware, excluirDenunciaController);
 
 export default router;

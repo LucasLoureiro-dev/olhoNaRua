@@ -9,7 +9,7 @@ export default function Perfil() {
     const [storedEmailValue, setStoredEmailValue] = useState('');
     const [storedSenhaValue, setStoredSenhaValue] = useState('');
     useEffect(() => {
-        if(localStorage.getItem("Email")){
+        if(localStorage.getItem("token")){
             setStoredEmailValue(localStorage.getItem("Email"))
             setStoredSenhaValue(localStorage.getItem("Senha"))
         }
@@ -28,6 +28,11 @@ export default function Perfil() {
             <h1> Perfil </h1>
             <p><Link href="/fazerDenuncia"> Fazer denuncia </Link></p>
             <p><Link href="/logOut"> - sair -</Link></p>
+
+            <h1> Dados do usuário </h1>
+            <h3></h3>
+            <h3></h3>
+            <h3></h3>
             
             
         </>

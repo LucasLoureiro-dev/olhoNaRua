@@ -47,15 +47,16 @@ const obterUsuarioPorIdController = async (req, res) => {
 
 const criarUsuarioController = async (req, res) => {
     try {
-        const { Email, Senha } = req.body;
+        const { Nome, Email, Senha } = req.body;
         const cargoUsuario = "Usuario"
         const usuarioData = {
+            Nome: Nome,
             Email: Email,
             Senha: Senha,
             Cargo: cargoUsuario
         }
         const usuarioId = await criarUsuario(usuarioData)
-        res.status(201).json({ mensagem: 'Usuário criado com secesso.', usuarioId })
+        res.status(201).json({ mensagem: 'Usuário criado com sucesso.', usuarioId })
     }
     catch (error) {
         console.error('Erro ao criar usuário:', error);
@@ -92,4 +93,4 @@ const excluirUsuarioController = async (req, res) => {
     }
 };
 
-export { listarUsuariosController,obterUsuarioPorEmailController, obterUsuarioPorIdController, criarUsuarioController, atualizarUsuarioController, excluirUsuarioController }
+export { listarUsuariosController, obterUsuarioPorEmailController, obterUsuarioPorIdController, criarUsuarioController, atualizarUsuarioController, excluirUsuarioController }
