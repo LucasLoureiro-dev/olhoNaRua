@@ -68,8 +68,8 @@ export default function Navbar() {
           <Link href="/denuncias" style={{ textDecoration: "none", color: "#000" }}>
             Denúncias
           </Link>
-          <Link href="/prestarQueixa" style={{ textDecoration: "none", color: "#000" }}>
-            Prestar queixa
+          <Link href="/fazerDenuncia" style={{ textDecoration: "none", color: "#000" }}>
+            Fazer denuncia
           </Link>
           <Link href="/projeto" style={{ textDecoration: "none", color: "#000" }}>
             Projeto

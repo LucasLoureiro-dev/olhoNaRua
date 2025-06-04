@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Denuncias (
     Email VARCHAR(255) NOT NULL,
     id_Usuario INT,
     Estado ENUM('Para analise', 'Em andamento', 'Concluida') NOT NULL,
-    Foto VARCHAR(255) NOT NULL,
+    Foto VARCHAR(255),
     FOREIGN KEY (id_Usuario) REFERENCES Usuarios(Id)
 );
 -- Inserir dados na tabela Denuncias

@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import 'bootstrap/dist/css/bootstrap.css'
 import Navbar from "@/components/Navbar-cidadao/Navbar";
 import Footer from "@/components/Footer-cidadao/Footer";
 
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossOrigin="anonymous"></script>
       </body>
     </html>
   );

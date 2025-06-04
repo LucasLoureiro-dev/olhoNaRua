@@ -1,16 +1,26 @@
-'use client'
-import { useState } from 'react';
-import axios from 'axios';
+"use client";
 
-function FormDenuncia() {
+import styles from "./page.module.css";
+// Instalações para o calendário: npm install react-datepicker date-fns
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { use, useState } from "react";
+import axios from "axios";
+
+export default function Formulario() {
+    const [dataSelecionada, setDataSelecionada] = useState(null);
+    const [mensagem, setMensagem] = useState('')
+    const [modal, setModal] = useState(null)
+
     const [form, setForm] = useState({
-        Motivo: '',
-        Descricao: '',
-        Localizacao: '',
-        id_Usuario: '',
-        Estado: 'Para análise',
-        Foto: null
-    });
+        Cep: "",
+        Bairro: "",
+        Rua: "",
+        Email: "",
+        PontoReferencia: "",
+        Relato: "",
+        Foto: "",
+    })
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -23,44 +33,198 @@ function FormDenuncia() {
     };
 
     const handleSubmit = async (e) => {
+        setMensagem('')
         e.preventDefault();
+        console.log(form)
 
-        const formData = new FormData();
-        formData.append('Motivo', form.Motivo);
-        formData.append('Descricao', form.Descricao);
-        formData.append('Localizacao', form.Localizacao);
-        formData.append('id_Usuario', form.id_Usuario);
-        formData.append('Estado', form.Estado);
-
-        if (form.Foto) {
-            formData.append('Foto', form.Foto);
+        if (form.Cep == '' && form.Bairro == '' && form.Rua == '' && form.Email == '' && form.PontoReferencia == '' && form.Relato == '') {
+            setMensagem('Preencha todos os campos do formulario!!!')
         }
-
-        try {
-            const token = localStorage.getItem("token")
-            const response = await axios.post('http://localhost:3001/denuncias', formData, {
+        else if (form.Cep == '') {
+            setMensagem('Preencha seu cep!!!')
+        }
+        else if (form.Bairro == '') {
+            setMensagem('Preencha seu bairro!!!')
+        }
+        else if (form.Rua == '') {
+            setMensagem('Preencha sua rua!!!')
+        }
+        else if (form.Email == '') {
+            setMensagem('Preencha seu email!!!')
+        }
+        else if (form.PontoReferencia == '') {
+            setMensagem('Coloque um ponto de referencia!!!')
+        }
+        else if (form.Relato == '') {
+            setMensagem('Deixe seu relato!!!')
+        }
+        else {
+            const email = localStorage.getItem("Email")
+            const senha = localStorage.getItem("Senha")
+            await axios.get(`http://localhost:3001/usuarios/${email}/${senha}`, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer `
+                    "Content-Type": 'application/json'
                 }
-            });
-            console.log(response.data);
-            alert("Denuncia feita com sucesso")
-        } catch (error) {
-            console.error('Erro ao enviar:', error);
+            })
+                .then((responce) => {
+                    const id_Usuario = responce.data.usuario.Id
+
+                    const formData = new FormData()
+                    formData.append("Cep", form.Cep)
+                    formData.append("Bairro", form.Bairro)
+                    formData.append("Rua", form.Rua)
+                    formData.append("Email", form.Email)
+                    formData.append("id_Usuario", id_Usuario)
+                    formData.append("PontoReferencia", form.PontoReferencia)
+                    formData.append("Data", dataSelecionada)
+                    formData.append("Relato", form.Relato)
+                    formData.append("Foto", form.Foto)
+
+                    try {
+                        const token = localStorage.getItem("token")
+                        axios.post('http://localhost:3001/denuncias', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                                'Authorization': `Bearer ${token}`
+                            }
+                        })
+                            .then((response) => {
+                                console.log(response.data)
+                                setModal(true)
+                            })
+                            .catch((error) => {
+                                console.log(error)
+                            })
+                    } catch (error) {
+                        console.error('Erro ao enviar:', error.message);
+                    }
+                })
         }
+
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" id="Motivo" name="Motivo" placeholder="Motivo" onChange={handleChange} required />
-            <textarea id="Descricao" name="Descricao" placeholder="Descrição" onChange={handleChange} required />
-            <input type="text" id="Localizacao" name="Localizacao" placeholder="Localização" onChange={handleChange} required />
-            <input type="number" id="id_Usuario" name="id_Usuario" placeholder="ID do Usuário" onChange={handleChange} required />
-            <input type="file" id="Foto" name="Foto" onChange={handleChange} />
-            <button type="submit">Enviar Denúncia</button>
-        </form>
+        <>
+
+            {/*Div para o banner da página*/}
+            <div className={styles.banner}>
+                <img src="./imgFormulario.png" alt="Banner azul e amarelo com frase marcante" />
+            </div>
+
+            {/*Div para armazenar o formulário*/}
+            <form className={styles.formulario} onSubmit={handleSubmit}>
+                <h2 className={styles.titulo}>Faça sua denúncia</h2>
+                <p className={styles.primeiroSubtitulo}>Informações sobre o local</p>
+
+                {/*Div para armazenar os conteúdos do endereço*/}
+                <div className={styles.endereco}>
+                    <div>
+                        <label className={styles.label} htmlFor="cep">CEP*</label>
+                        <input type="text" name="Cep" id="cep" className={styles.input} onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label className={styles.label} htmlFor="bairro">BAIRRO*</label>
+                        <input type="text" name="Bairro" id="bairro" className={styles.input} onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label className={styles.label} htmlFor="rua">RUA*</label>
+                        <input type="text" name="Rua" id="rua" className={styles.input} onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label className={styles.label} htmlFor="email">EMAIL PARA CONTATO*</label>
+                        <input type="email" name="Email" id="email" className={styles.input} onChange={handleChange} />
+                    </div>
+                </div>
+
+                {/*Div para o campo de preenchimento do ponto de referência*/}
+                <div>
+                    <label className={styles.label} htmlFor="pontoReferencia">PONTO DE REFERÊNCIA*</label>
+                    <input type="text" name="PontoReferencia" id="pontoReferencia" className={styles.inputFull} onChange={handleChange} />
+                </div>
+
+                <h3 className={styles.segundoSubtitulo}>Sobre o ocorrido</h3>
+                {/*Div para armazenar as informações do ocorrido*/}
+                <div className={styles.ocorrido}>
+                    <div>
+                        {/*Seção que armazena a data e deixa o calendário mais bonito e intuitivo*/}
+                        <label className={styles.label} htmlFor="data">DATA*</label>
+                        <DatePicker
+                            selected={dataSelecionada}
+                            onChange={(date) => setDataSelecionada(date)}
+                            dateFormat="yyyy/MM/dd"
+                            className={styles.input}
+                        />
+                    </div>
+
+                    {/*Div para a seção de relato*/}
+                    <div>
+                        <label className={styles.label} htmlFor="relato">RELATO* (INFORMAÇÕES ADICIONAIS)</label>
+                        <textarea name="Relato" id="relato" rows="5" className={styles.textarea} onChange={handleChange}></textarea>
+                    </div>
+                </div>
+
+                {/*Div para a seção de anexos*/}
+                <div>
+                    <label className={styles.label} htmlFor="Foto">ANEXOS</label>
+                    <input type="file" name="Foto" id="Foto" className={styles.inputFull} onChange={handleChange} />
+                </div>
+
+                {/*Botão de enviar o formulário*/}
+                {/* Button trigger modal */}
+                <button
+                    type="submit"
+                    className="btn btn-warning text-light"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                >
+                    Enviar Denuncia
+                </button>
+                {modal ? (
+                    <>
+                        {/* Modal */}
+                        <div
+                            className="modal fade"
+                            id="exampleModal"
+                            tabIndex="{-1}"
+                            aria-labelledby="exampleModalLabel"
+                            aria-hidden="true"
+                        >
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h1 className="modal-title fs-5" id="exampleModalLabel">
+                                            Denuncia enviada!
+                                        </h1>
+                                        <button
+                                            type="button"
+                                            className="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                        ></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        Sua denuncia foi enviada com sucesso, agora está em analise, acompanhe
+                                        sua denuncia em "perfil".
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button
+                                            type="button"
+                                            className="btn btn-danger"
+                                            data-bs-dismiss="modal"
+                                        >
+                                            Fechar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                    <>
+
+                    </>
+                )}
+            </form >
+        </>
     );
 }
-
-export default FormDenuncia;

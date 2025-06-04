@@ -1,51 +1,11 @@
 import Navbar from '@/components/Navbar-cidadao/Navbar';
 import Footer from '@/components/Footer-cidadao/Footer';
 import ReportCard from '@/components/Cards/Card';
-export default function Home() {
-  const reportData = [
-    {
-      title: 'Buraco na Rua A',
-      subtitle: 'Perigo para pedestres Perigo para pedestres Perigo para pedestres Perigo para pedestres ',
-      imageUrl: '/img/buraco.png',
-      status: 'Em andamento',
-      date: '10 de maio',
-    },
-    {
-      title: 'Entulho no bairro X',
-      subtitle: ' Lixo acumulado Lixo acumulado Lixo acumulado Lixo acumulado Lixo acumulado',
-      imageUrl: '/img/buraco.png',
-      status: 'Resolvido',
-      date: '10 de maio',
-    },
-    {
-      title: 'Buraco na Rua A',
-      subtitle: 'Perigo para pedestres Perigo para pedestres Perigo para pedestres Perigo para pedestres',
-      imageUrl: '/img/buraco.png',
-      status: 'Em andamento',
-      date: '10 de maio',
-    },
-    {
-      title: 'Entulho no bairro X',
-      subtitle: 'Lixo acumulado Lixo acumulado Lixo acumulado Lixo acumulado Lixo acumulado',
-      imageUrl: '/img/buraco.png',
-      status: 'Resolvido',
-      date: '10 de maio',
-    },
-    {
-      title: 'Buraco na Rua A',
-      subtitle: 'Perigo para pedestres Perigo para pedestres Perigo para pedestres Perigo para pedestres',
-      imageUrl: '/img/buraco.png',
-      status: 'Em andamento',
-      date: '10 de maio',
-    },
-    {
-      title: 'Entulho no bairro X',
-      subtitle: 'Lixo acumulado Lixo acumulado Lixo acumulado Lixo acumulado Lixo acumulado',
-      imageUrl: '/img/buraco.png',
-      status: 'Resolvido',
-      date: '10 de maio',
-    },
-  ];
+import axios from 'axios';
+export default async function Denuncias() {
+
+  const denuncias = await axios.get("http://localhost:3001/denuncias")
+  const data = denuncias.data
 
   return (
     <div>
@@ -69,20 +29,47 @@ export default function Home() {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
           gap: "20px",
-          placeItems: "center", 
+          placeItems: "center",
         }}
       >
-        {reportData.map((report, index) => (
-          <ReportCard
-            key={index}
-            title={report.title}
-            subtitle={report.subtitle}
-            imageUrl={report.imageUrl}
-            status={report.status}
-            date={report.date}
-          />
-        ))}
-        
+        {data ? (
+          <>
+            {data.map((report, index) => {
+              console.log(report.Foto)
+              if (report.Foto == null || report.Foto == "") {
+                return (
+                  <ReportCard
+                    key={index}
+                    title={report.Rua}
+                    subtitle={report.Relato}
+                    imageUrl="denunciaSemFoto.png"
+                    status={report.Estado}
+                    date={report.Data_da_denuncia}
+                  />
+                )
+
+              }
+              else {
+                return (
+                  <ReportCard
+                    key={index}
+                    title={report.Rua}
+                    subtitle={report.Relato}
+                    imageUrl={report.Foto}
+                    status={report.Estado}
+                    date={report.Data_da_denuncia}
+                  />
+                )
+              }
+
+            })}
+          </>
+        ) : (
+          <>
+            carregando...
+          </>
+        )}
+
       </section>
     </div>
   );
@@ -90,4 +77,3 @@ export default function Home() {
 
 
 
-  

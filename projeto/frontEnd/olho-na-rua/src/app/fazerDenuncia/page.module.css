@@ -1,0 +1,237 @@
+/*VARIÁVEL COM A FONTE E AS CORES MAIS UTILIZADAS*/
+:root {
+  --preto: #000000;
+  --branco: #ffffff;
+  --amareloClaro: #ffdb57;
+  --amareloEscuro: #ffd449;
+  --azulClaro: #00509d;
+  --azulEscuro: #11296b;
+  --cinza: #ededed;
+  --fonte: "Inter", sans-serif;
+}
+
+/*CONFIGURAÇÕES DO BANNER*/
+.banner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 5%;
+  transition: transform 0.3s ease;
+}
+
+.banner:hover {
+  transform: scale(1.1);
+}
+
+.banner img {
+  width: 60%;
+  border-radius: 20px;
+}
+
+/*CONFIGURAÇÕES E ESTILIZAÇÃO DO FORMULÁRIO*/
+.formulario {
+  max-width: 80%;
+  margin: auto;
+  margin-top: 10%;
+  padding: 2rem;
+  border: 2px solid #11296b;
+  border-radius: 12px;
+  background-color: var(--branco);
+}
+
+.titulo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--azulEscuro);
+  font-family: var(--fonte);
+  margin-top: 2rem;
+}
+
+/*Estilização do subtítulo 'Informações sobre o local'*/
+.primeiroSubtitulo {
+  font-size: 17px;
+  color: var(--azulEscuro);
+  margin-bottom: 1rem;
+  font-family: var(--fonte);
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+/*Estilização do subtítulo 'Sobre o ocorrido'*/
+.segundoSubtitulo {
+  font-size: 17px;
+  color: var(--azulEscuro);
+  margin-bottom: 1rem;
+  font-family: var(--fonte);
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+/*Estilização da parte do endereço*/
+.endereco {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  margin-top: 3rem;
+}
+
+/*Estilização da parte do ocorrido*/
+.ocorrido {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+}
+
+/*Estilização dos campos de preenchimento*/
+.input,
+.inputFull {
+  padding: 0.5rem;
+  border: 2px solid #11296b;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-family: var(--fonte);
+}
+
+.inputFull {
+  width: 95%;
+  margin-bottom: 2rem;
+}
+
+.textarea {
+  width: 90%;
+  padding: 0.5rem;
+  border: 2px solid #11296b;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  resize: vertical;
+  font-family: var(--fonte);
+}
+
+.label {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  display: block;
+  font-family: var(--fonte);
+  color: var(--azulEscuro);
+  font-weight: bold;
+}
+
+/*Estilização do calendário*/
+.react-datepicker {
+  font-family: var(--fonte);
+  border: 2px solid var(--azulEscuro);
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.react-datepicker__header {
+  background-color: var(--azulClaro);
+  color: white;
+  border-bottom: none;
+}
+
+.react-datepicker__day--selected {
+  background-color: var(--amareloClaro);
+  color: black;
+}
+
+/*Estilização do botão*/
+.botao {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--azulEscuro);
+  color: var(--branco);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: var(--fonte);
+  margin-top: 2rem;
+}
+
+.botao:hover {
+  background-color: var(--azulClaro);
+}
+
+/*RESPONSIVIDADE*/
+/*Responsividade para resolução máxima de 1024px*/
+@media (max-width: 1024px) {
+  .formulario {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+
+  .endereco {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ocorrido {
+    grid-template-columns: 1fr;
+  }
+
+  .banner img {
+    width: 70%;
+  }
+}
+
+/*Responsividade para resolução máxima de 768px (tablets)*/
+@media (max-width: 768px) {
+  .formulario {
+    padding: 1rem;
+  }
+
+  .endereco {
+    grid-template-columns: 1fr;
+  }
+
+  .ocorrido {
+    grid-template-columns: 1fr;
+  }
+
+  .titulo,
+  .primeiroSubtitulo,
+  .segundoSubtitulo {
+    text-align: center;
+  }
+
+  .banner img {
+    width: 90%;
+  }
+
+  .botao {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/*Responsividade para resolução máxima de 480px (celulares)*/
+@media (max-width: 480px) {
+  .formulario {
+    max-width: 75%;
+    padding: 1rem;
+  }
+
+  .input,
+  .inputFull,
+  .textarea {
+    font-size: 1.1rem;
+
+  }
+
+  .label {
+    font-size: 0.9rem;
+  }
+
+  .titulo {
+    font-size: 1.25rem;
+  }
+
+  .banner img {
+    width: 90%;
+    border-radius: 12px;
+  }
+}

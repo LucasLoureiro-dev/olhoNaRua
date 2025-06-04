@@ -5,7 +5,7 @@ export default function ReportCard({ title, subtitle, imageUrl, status, date }) 
   return (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
-        <Image src={imageUrl} alt={title} layout="fill" objectFit="cover" />
+        <img src={imageUrl} alt={title}/>
       </div>
       <div className={styles.content}>
         <h3 className={styles.title}>{title}</h3>

@@ -34,18 +34,22 @@ const obterDenunciaPorIdDoUsuarioController = async (req, res) => {
 
 const criarDenunciaController = async (req, res) => {
     try {
-        const { Motivo, Descricao, Localizacao, id_Usuario, Estado } = req.body;
+        const { Cep, Bairro, Rua, id_Usuario, Email, PontoReferencia, Data, Relato } = req.body;
         const Foto = req.file ? req.file.filename : "";
         let fotoPath = null;
         if (req.file) {
             fotoPath = req.file.path.replace(__dirname.replace('\\controllers', ''), '')
         }
         const denunciaData = {
-            Motivo: Motivo,
-            Descricao: Descricao,
-            Localizacao: Localizacao,
+            Cep: Cep,
+            Bairro: Bairro,
+            Rua: Rua,
+            Ponto_de_referencia: PontoReferencia,
+            Data_da_denuncia: Data,
+            Relato: Relato,
+            Email: Email,
             id_Usuario: id_Usuario,
-            Estado: Estado,
+            Estado: "Para analise",
             Foto: Foto
         }
         const denunciaId = await criarDenuncia(denunciaData)

@@ -27,7 +27,7 @@ const loginController = async (req, res) => {
 
         const token = jwt.sign({ Id: usuario.Id, Cargo: usuario.Cargo }, jwt_secret);
 
-        res.json({ mensagem: 'Login realizado com sucesso', token });
+        res.json({ mensagem: 'Login realizado com sucesso', token, Usuario: usuario });
     } catch (error) {
         console.error('Erro ao fazer login:', error);
 
