@@ -1,10 +1,10 @@
 OlhoNaRua
  
-Bem-vindo ao OlhoNaRua, uma plataforma voltada para facilitar denúncias e promover melhorias na comunidade da Vila do Norte.
+Bem-vindo ao OlhoNaRua, uma plataforma voltada para facilitar denúncias e promover melhorias na comunidade da Vila Nova do Norte.
  
 📌 Sobre o Projeto
  
-OlhoNaRua é uma iniciativa que visa dar voz à população da Vila do Norte, permitindo que moradores e visitantes façam denúncias de forma rápida, fácil e prática. Seja um 
+OlhoNaRua é uma iniciativa que visa dar voz à população da Vila Nova do Norte, permitindo que moradores e visitantes façam denúncias de forma rápida, fácil e prática. Seja um 
 buraco na rua, lixo acumulado, iluminação pública quebrada ou qualquer outro problema urbano, aqui é o lugar certo para relatar.
  
 Nosso sistema transforma cada denúncia em um PDF, garantindo um comprovante oficial para o usuário e facilitando o acompanhamento e a atualização da situação denunciada.
@@ -19,7 +19,7 @@ Nosso sistema transforma cada denúncia em um PDF, garantindo um comprovante ofi
  
 🎯 Objetivo:
  
-Nosso objetivo é empoderar a comunidade, melhorar a transparência e acelerar a resolução de problemas urbanos na Vila do Norte por meio da participação cidadã.
+Nosso objetivo é empoderar a comunidade, melhorar a transparência e acelerar a resolução de problemas urbanos na Vila Nova do Norte por meio da participação cidadã.
  
 🛠️ Tecnologias Utilizadas:
  
